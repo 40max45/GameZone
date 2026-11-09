@@ -1,0 +1,365 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GameZone - Gaming Hub</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f5f7fb;
+  color: #172033;
+}
+
+header {
+  background: white;
+  padding: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 10px #0001;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.logo {
+  color: #2563eb;
+  font-size: 23px;
+  font-weight: bold;
+}
+
+nav a {
+  text-decoration: none;
+  color: #334155;
+  font-size: 13px;
+  margin-left: 10px;
+}
+
+.hero {
+  text-align: center;
+  padding: 65px 20px;
+  background: linear-gradient(135deg,#dceaff,#fff);
+}
+
+.hero h1 {
+  font-size: 34px;
+  margin-bottom: 15px;
+}
+
+.hero h1 span {
+  color: #2563eb;
+}
+
+.hero p {
+  color: #64748b;
+  line-height: 1.7;
+}
+
+.btn {
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 9px;
+  padding: 13px 22px;
+  margin-top: 20px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+section {
+  padding: 35px 18px;
+}
+
+h2 {
+  margin-bottom: 20px;
+}
+
+.search {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #dce3ef;
+  border-radius: 10px;
+  font-size: 15px;
+  margin-bottom: 18px;
+}
+
+.filters {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  margin-bottom: 22px;
+}
+
+.filters button {
+  padding: 10px 16px;
+  border: 1px solid #dce3ef;
+  background: white;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.filters button.active {
+  background: #2563eb;
+  color: white;
+}
+
+.games {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 14px;
+}
+
+.game-card {
+  background: white;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 3px 12px #0000000d;
+}
+
+.game-art {
+  height: 125px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 55px;
+  background: #e7efff;
+}
+
+.game-card:nth-child(2) .game-art {
+  background: #fff0dc;
+}
+
+.game-card:nth-child(3) .game-art {
+  background: #e4f8e9;
+}
+
+.game-card:nth-child(4) .game-art {
+  background: #f2e9ff;
+}
+
+.game-info {
+  padding: 13px;
+}
+
+.game-info h3 {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.game-info p {
+  color: #64748b;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.game-info button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 12px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.news-card, .about-card {
+  background: white;
+  padding: 20px;
+  border-radius: 14px;
+  line-height: 1.7;
+}
+
+.news-card p, .about-card p {
+  color: #64748b;
+}
+
+footer {
+  background: white;
+  padding: 25px;
+  text-align: center;
+  color: #64748b;
+  font-size: 13px;
+}
+
+@media(min-width:700px) {
+  .games {
+    grid-template-columns: repeat(4,1fr);
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">🎮 GameZone</div>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#games">Games</a>
+    <a href="#news">News</a>
+  </nav>
+</header>
+
+<div class="hero" id="home">
+  <h1>Welcome to <span>GameZone</span></h1>
+  <p>Your ultimate gaming destination.</p>
+  <p>Discover games. Explore worlds. Have fun!</p>
+  <button class="btn" onclick="goGames()">
+    Explore Games
+  </button>
+</div>
+
+<section id="games">
+  <h2>Explore Games 🎮</h2>
+
+  <input
+    type="text"
+    class="search"
+    id="search"
+    placeholder="🔍 Search games..."
+    oninput="filterGames()"
+  >
+
+  <div class="filters">
+    <button class="active"
+      onclick="setCategory('All',this)">All</button>
+    <button onclick="setCategory('Adventure',this)">Adventure</button>
+    <button onclick="setCategory('Action',this)">Action</button>
+    <button onclick="setCategory('Creative',this)">Creative</button>
+  </div>
+
+  <div class="games" id="gameList">
+
+    <div class="game-card" data-category="Adventure">
+      <div class="game-art">⛏️</div>
+      <div class="game-info">
+        <h3>Minecraft</h3>
+        <p>Build and explore amazing block worlds.</p>
+        <button onclick="showGame('Minecraft')">Explore</button>
+      </div>
+    </div>
+
+    <div class="game-card" data-category="Creative">
+      <div class="game-art">🎲</div>
+      <div class="game-info">
+        <h3>Roblox</h3>
+        <p>Play and discover exciting experiences.</p>
+        <button onclick="showGame('Roblox')">Explore</button>
+      </div>
+    </div>
+
+    <div class="game-card" data-category="Action">
+      <div class="game-art">⚔️</div>
+      <div class="game-info">
+        <h3>Action Games</h3>
+        <p>Discover exciting action adventures.</p>
+        <button onclick="showGame('Action Games')">Explore</button>
+      </div>
+    </div>
+
+    <div class="game-card" data-category="Adventure">
+      <div class="game-art">🚀</div>
+      <div class="game-info">
+        <h3>Adventure Games</h3>
+        <p>Travel through amazing new worlds.</p>
+        <button onclick="showGame('Adventure Games')">Explore</button>
+      </div>
+    </div>
+
+  </div>
+
+  <p id="noResults" style="display:none;margin-top:20px">
+    No games found. Try another search.
+  </p>
+</section>
+
+<section id="news">
+  <h2>Gaming News 📰</h2>
+  <div class="news-card">
+    <h3>Welcome to GameZone!</h3>
+    <p>Gaming news, updates and exciting content
+    are coming soon.</p>
+  </div>
+</section>
+
+<section id="about">
+  <h2>About GameZone</h2>
+  <div class="about-card">
+    <p>GameZone is a gaming website for gamers.
+    Discover games, explore gaming content and
+    enjoy your gaming journey.</p>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 GameZone</p>
+  <p>Made with ❤️ for gamers.</p>
+</footer>
+
+<script>
+let selectedCategory = "All";
+
+function goGames() {
+  document.getElementById("games").scrollIntoView({
+    behavior: "smooth"
+  });
+}
+
+function setCategory(category, button) {
+  selectedCategory = category;
+
+  document.querySelectorAll(".filters button")
+    .forEach(btn => btn.classList.remove("active"));
+
+  button.classList.add("active");
+  filterGames();
+}
+
+function filterGames() {
+  let search = document.getElementById("search")
+    .value.toLowerCase();
+
+  let cards = document.querySelectorAll(".game-card");
+  let visible = 0;
+
+  cards.forEach(card => {
+    let name = card.querySelector("h3")
+      .textContent.toLowerCase();
+
+    let category = card.dataset.category;
+
+    let matchesSearch = name.includes(search);
+    let matchesCategory =
+      selectedCategory === "All" ||
+      category === selectedCategory;
+
+    if (matchesSearch && matchesCategory) {
+      card.style.display = "block";
+      visible++;
+    } else {
+      card.style.display = "none";
+    }
+  });
+
+  document.getElementById("noResults").style.display =
+    visible === 0 ? "block" : "none";
+}
+
+function showGame(name) {
+  alert("You selected " + name +
+    "! More information coming soon.");
+}
+</script>
+
+</body>
+</html>
