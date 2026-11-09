@@ -309,9 +309,23 @@ footer {
 <script>
 let selectedCategory = "All";
 
-function goGames() {
-  document.getElementById("games").scrollIntoView({
-    behavior: "smooth"
+function showGame(name) {
+
+  const games = {
+    "Minecraft":
+      "https://play.google.com/store/apps/details?id=com.mojang.minecraftpe",
+
+    "Roblox":
+      "https://play.google.com/store/apps/details?id=com.roblox.client"
+  };
+
+  if (games[name]) {
+    window.open(games[name], "_blank");
+  } else {
+    alert("Game coming soon!");
+  }
+
+}
   });
 }
 
